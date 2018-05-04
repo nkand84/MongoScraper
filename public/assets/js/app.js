@@ -1,10 +1,9 @@
 $("#scrape-article").on("click", function (e) {
     e.preventDefault();
     $.getJSON("/all", function (data) {
-        // Call our function to generate a table body
         displayResults(data);
     });
-    // list all the ny data in divs on scrape new articles
+    
 
 });
 
