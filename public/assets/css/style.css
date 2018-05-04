@@ -1,11 +1,19 @@
 body{
+	
+	font-family: 'Lato', sans-serif;
+	color:white;
+	
+}
+.navbar{
+	margin-bottom: 0px;
+}
+#hero-section{
+	width:100%;
+	height:500px;
 	background: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0,0,0,0.6)), url(../imgs/pic1.jpg);
 	background-size:cover;
 	background-position:center;
 	background-repeat: no-repeat;
-	font-family: 'Lato', sans-serif;
-	color:white;
-	
 }
 /*makes the image fit the entire container*/
 html{
@@ -22,11 +30,19 @@ hr{
 	border-top:1px solid #f8f8f8;
 	border-bottom:1px solid rgba(0,0,0,0.2);
 }
-#content{
+#heading-content{
 	text-align:center;
 	padding-top:10%;
 	/*rgba includes the last parameter i.e transparency*/
 	text-shadow:0px 5px 4px rgba(0,0,0,0.4),
 	            0px 10px 8px rgba(0,0,0,0.1),
 	            0px 15px 18px rgba(0,0,0,0.1);
+}
+.btn{
+	margin-top: 8px;
+}
+
+#main{
+	width:100%;
+	height:auto;
 }
