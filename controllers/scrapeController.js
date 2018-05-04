@@ -15,27 +15,33 @@ db.on("error", function (error) {
 });
 
 
+router.get("/all", function (req, res) {
+    db.nyData.find({}, function (error, data) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.json(data);
+        }
+    });
+});
 
+router.get("/scrapped", function (req, res) {
+    request("https://www.nytimes.com/", function (err, response, html) {
+        // load html into cheerio and save as a variable
+        var $ = cheerio.load(html);
+        // an empty array to save the data we scrapped
+        var results = [];
+        // select the element
+        $("h2.story-heading").each(function (i, element) {
+            // save the element text in variable title
+            var title = $(element).text();
+            // save the child 
+            var summary = $(element).next().next().text();
+            db.nyData.insert({ title: title, summary:summary });
+        });
+        res.redirect("/all");
+    });
+});
+module.exports = router;
 
-// making a req to website you want to scrape
-// request("https://www.nytimes.com/", function (err, response, html) {
-//     // load html into cheerio and save as a variable
-//     var $ = cheerio.load(html);
-//     // an empty array to save the data we scrapped
-//     var results = [];
-//     // select the element
-//     $("h2.story-heading").each(function(i,element){
-//         // save the element text in variable title
-//         var title = $(element).text();
-//         // save the child 
-//         var link = $(element).children().attr("href");
-
-//         // push these results into an array
-//         results.push(
-//             {title : title,
-//              link : link
-//             }
-//         )
-//     });
-//     console.log(results);
-// });
