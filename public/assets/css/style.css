@@ -7,7 +7,7 @@ html{
 body{
 	background:  url(../imgs/white.png);
 	font-family: 'Lato', sans-serif;
-	color:white;
+	color:black;
 }
 /*============================================ NAVBAR ========================================================= */
 .navbar{
@@ -30,7 +30,11 @@ body{
 
 h1 {
 	font-weight:700;
-   	font-size:5em;
+	   font-size:5em;
+	  
+}
+h1, h3{
+	color: white;
 }
 hr{
 	width:400px;
