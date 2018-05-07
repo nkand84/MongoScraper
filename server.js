@@ -26,6 +26,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
+
 if(process.env.MONGODB_URI){
   mongoose.connect(process.env.MONGODB_URI);
 } 
@@ -49,7 +50,7 @@ app.get("/scrape", function (req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     // Now, we grab every h2 within an article tag, and do the following:
-    var result = {};
+ 
     $("article.theme-summary").each(function (i, element) {
       // Save an empty result object
       var result = {};
@@ -65,7 +66,7 @@ app.get("/scrape", function (req, res) {
         db.Article.create(result)
           .then(function (dbArticle) {
             // View the added result in the console
-            // console.log(dbArticle);
+            console.log(dbArticle);
           })
           .catch(function (err) {
             // If an error occurred, send it to the client
@@ -87,7 +88,7 @@ app.get("/articles", function (req, res) {
       console.log(dbArticle);
       // If we were able to successfully find Articles, send them back to the client
       // res.render("index",{articles: dbArticle});
-      res.json(dbArticle);
+     res.json(dbArticle);
     })
     .catch(function (err) {
       // If an error occurred, send it to the client
