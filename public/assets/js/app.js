@@ -3,6 +3,7 @@ $.getJSON("/articles", function(data) {
     displayResults(data,"index");
 });
 
+// scrape on click 
 $(document).on("click", "#scrape-article", function (e) {
     e.preventDefault();
     $("h1").text("Mongo Scraper");
@@ -14,7 +15,7 @@ $(document).on("click", "#scrape-article", function (e) {
 
 });
 
-
+// display results  
 function displayResults(data,calledFrom) {
     // console.log(data);
     $("#scrape-content").empty();
@@ -25,7 +26,7 @@ function displayResults(data,calledFrom) {
         var divTitle = $("<h3 class='panel-title'>");
         var divBody = $("<div class='panel-body'>");
         if (calledFrom == "index") {
-            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-save btn-success' data-id='" + data[i]._id + "'" + "> Save Article</button>" + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-delete btn-danger' data-id='" + data[i]._id + "'" + "> Delete</button>");
+            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-save btn-success' data-id='" + data[i]._id + "'" + "> Save Article</button>");
             divBody.html(data[i].summary + "<br><br>" + "<a href='" + data[i].link + "'>" + data[i].link + "</a>");
         }
         else if  (calledFrom == "savedarticles") {
@@ -40,7 +41,7 @@ function displayResults(data,calledFrom) {
             $("#scrape-content").append(div);
         }
         else if(calledFrom == "savedarticles") {
-            console.log("savedarticles")
+            // console.log("savedarticles");
             $("#scrape-content").append(div);
         }
     }
@@ -51,13 +52,14 @@ function displayResults(data,calledFrom) {
 $(document).on("click", ".btn-save", function (e) {
     e.preventDefault();
     var thisId = $(this).attr("data-id");
-    // console.log(thisId)
+    
     $.ajax({
         method: "POST",
         url: "/articles/" + thisId,
         data: { saved: true }
     }).then(function (data) {
         // Log the response
+        console.log(data);
     });
 });
 
@@ -67,13 +69,11 @@ $(document).on("click", "#saved-articles", function (e) {
     $("h3").text("Your saved articles");
     // Now make an ajax call for the Article
     $.getJSON("/save", function (data) {
-        console.log("in app savedarticles")
         console.log(data);
         displayResults(data,"savedarticles");
 
     });
-    // get req to display all the artciles that have saved = true 
-
+    
 });
 
 
