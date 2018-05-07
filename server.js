@@ -19,23 +19,27 @@ var PORT = 8080;
 var app = express();
 
 // Configure middleware
-
+var databaseUri = "mongodb://localhost/nyTimes";
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
-
+if(process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+} 
+else{
+  mongoose.connect(databaseUri);
+}
+ 
+var mongodb = mongoose.connection;
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/nyTimes");
+// mongoose.connect("mongodb://localhost/nyTimes");
 
 // Routes
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "./views/index.html"));
-})
-app.get("/savedarticles", function (req, res) {
-  res.sendFile(path.join(__dirname, "./views/savedarticles.html"));
 })
 
 // A GET route for scraping the echoJS website
@@ -61,7 +65,7 @@ app.get("/scrape", function (req, res) {
         db.Article.create(result)
           .then(function (dbArticle) {
             // View the added result in the console
-            console.log(dbArticle);
+            // console.log(dbArticle);
           })
           .catch(function (err) {
             // If an error occurred, send it to the client
@@ -80,7 +84,9 @@ app.get("/articles", function (req, res) {
   // Grab every document in the Articles collection
   db.Article.find({})
     .then(function (dbArticle) {
+      console.log(dbArticle);
       // If we were able to successfully find Articles, send them back to the client
+      // res.render("index",{articles: dbArticle});
       res.json(dbArticle);
     })
     .catch(function (err) {

@@ -4,6 +4,7 @@ $(document).on("click", "#scrape-article", function (e) {
     $("h3").text("New York Times Edition");
     $.getJSON("/articles", function (data) {
         displayResults(data,"index");
+        console.log(data);
     });
 
 
@@ -20,11 +21,11 @@ function displayResults(data,calledFrom) {
         var divTitle = $("<h3 class='panel-title'>");
         var divBody = $("<div class='panel-body'>");
         if (calledFrom == "index") {
-            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-save btn-default' data-id='" + data[i]._id + "'" + "> Save Article</button>");
+            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-save btn-success' data-id='" + data[i]._id + "'" + "> Save Article</button>" + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-delete btn-danger' data-id='" + data[i]._id + "'" + "> Delete</button>");
             divBody.html(data[i].summary + "<br><br>" + "<a href='" + data[i].link + "'>" + data[i].link + "</a>");
         }
         else if  (calledFrom == "savedarticles") {
-            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-save btn-default' data-id='" + data[i]._id + "'" + "> Article Notes </button>");
+            divTitle.html(data[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-note btn-default' data-id='" + data[i]._id + "'" + "> Article Notes </button>" + "&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-delete btn-danger' data-id='" + data[i]._id + "'" + "> Delete</button>");
             divBody.html(data[i].summary + "<br><br>" + "<a href='" + data[i].link + "'>" + data[i].link + "</a>");
         }
         divHead.append(divTitle);
@@ -75,3 +76,8 @@ $(document).on("click", "#saved-articles", function (e) {
 
 
 
+$(document).on("click", ".btn-note", function (e) {
+
+
+    
+});
