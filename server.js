@@ -87,8 +87,7 @@ app.get("/articles", function (req, res) {
     .then(function (dbArticle) {
       console.log(dbArticle);
       // If we were able to successfully find Articles, send them back to the client
-      // res.render("index",{articles: dbArticle});
-     res.json(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function (err) {
       // If an error occurred, send it to the client

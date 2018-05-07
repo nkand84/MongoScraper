@@ -1,9 +1,13 @@
+// Grab the articles as a json
+$.getJSON("/articles", function(data) {
+    displayResults(data,"index");
+});
+
 $(document).on("click", "#scrape-article", function (e) {
     e.preventDefault();
     $("h1").text("Mongo Scraper");
     $("h3").text("New York Times Edition");
-    $.getJSON("/articles", function (data) {
-        displayResults(data,"index");
+    $.get("/scrape", function (data) {
         console.log(data);
     });
 
@@ -37,7 +41,6 @@ function displayResults(data,calledFrom) {
         }
         else if(calledFrom == "savedarticles") {
             console.log("savedarticles")
-            // $("#saved").append(div);
             $("#scrape-content").append(div);
         }
     }
