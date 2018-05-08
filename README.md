@@ -1,6 +1,6 @@
 <h1> MongoScraper</h1>
 <p>A full stack web application that lets users view and leave comments on the latest news.</p>
-
+<p>Link to deployed site: <a href="https://mongoosescrape.herokuapp.com/" target="_blank"></a> Click Here</p>
 <h3>Functionality:</h3>
 <p>Whenever a user visits the website, the app should scrape stories from a news outlet of your choice and display them for the user. Each scraped article should be saved to the application database. </p>
 <p>At a minimum, the app should scrape and display the following information for each article:</p>
@@ -17,7 +17,7 @@
 <li> body-parser : https://www.npmjs.com/package/body-parser  </li>
 <li>morgan : https://www.npmjs.com/package/morgan  </li>
 <li>request: https://www.npmjs.com/package/request </li>
-</ul>
+</ul><br><br>
 <img src="/public/assets/imgs/mongo-scraper.jpg" alt="mongo-news-scraper">
 <h3>Author</h3>
 <p>Nitya Kandukuri</p>
