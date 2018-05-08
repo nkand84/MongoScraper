@@ -9,7 +9,7 @@ $(document).on("click", "#scrape-article", function (e) {
     $("h1").text("Mongo Scraper");
     $("h3").text("New York Times Edition");
     $.get("/scrape", function (data) {
-        console.log(data);
+        // console.log(data);
     });
 
 
@@ -55,7 +55,7 @@ $(document).on("click", ".btn-save", function (e) {
     console.log(thisId)
     $.ajax({
         method: "POST",
-        url: "/articles/" + thisId,
+        url: "/savearticles/" + thisId,
         data: { saved: true }
     }).then(function (data) {
         // Log the response
@@ -76,14 +76,14 @@ $(document).on("click", "#saved-articles", function (e) {
     
 });
 
-$(document).on("click", ".panel", function (e) {
+$(document).on("click", ".btn-note", function (e) {
     console.log("clicked for notes");
     // e.preventDefault();
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the p tag
     var thisId = $(this).attr("data-id");
-  
+    console.log(thisId)
     // Now make an ajax call for the Article
     $.ajax({
       method: "GET",
@@ -119,7 +119,8 @@ $(document).on("click", ".panel", function (e) {
 $(document).on("click", "#savenote", function() {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
-  
+    console.log("in saved note app")
+    console.log(thisId)
     // Run a POST request to change the note, using what's entered in the inputs
     $.ajax({
       method: "POST",
@@ -134,6 +135,7 @@ $(document).on("click", "#savenote", function() {
       // With that done
       .then(function(data) {
         // Log the response
+        console.log("nishanth")
         console.log(data);
         // Empty the notes section
         $("#notes").empty();
