@@ -10,13 +10,20 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
+// Initialize Express
+var app = express();
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Require all models
 var db = require("./models");
 
 var PORT = process.env.PORT || 8080;
 
-// Initialize Express
-var app = express();
+
 
 // Configure middleware
 var databaseUri = "mongodb://localhost/nyTimes";
@@ -40,7 +47,18 @@ var mongodb = mongoose.connection;
 
 // Routes
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "./views/index.html"));
+  
+  db.Article.find({})
+    .then(function (dbArticle) {
+      console.log(dbArticle);
+      // If we were able to successfully find Articles, send them back to the client
+      // res.json(dbArticle);
+      res.render("index", {articles: dbArticle});
+    })
+    .catch(function (err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 })
 
 // A GET route for scraping the echoJS website
@@ -87,7 +105,8 @@ app.get("/articles", function (req, res) {
     .then(function (dbArticle) {
       console.log(dbArticle);
       // If we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
+      // res.json(dbArticle);
+      res.render("index", {articles: dbArticle});
     })
     .catch(function (err) {
       // If an error occurred, send it to the client
@@ -119,7 +138,8 @@ app.get("/save", function (req, res) {
   db.Article.find({ "saved": true }).then(function (dbArticle) {
     // If we were able to successfully update an Article, send it back to the client
     console.log(dbArticle);
-    res.json(dbArticle);
+    // res.json(dbArticle);
+    res.render("index",{articles : dbArticle});
   })
     .catch(function (err) {
       // If an error occurred, send it to the client

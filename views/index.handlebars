@@ -1,0 +1,35 @@
+
+<!-- Heading Content goes here -->
+<div class="container" id="hero-section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="heading-content">
+                <h1>Mongo Scraper</h1>
+                <h3>New York Times Edition</h3>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Content goes here -->
+<div class="container">
+    <div class="row" id="main">
+        <div class="col-lg-12" id="scrape-content">
+           <p> {{title}}</p>
+            {{#each articles}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>{{title}}</h2>
+                    <button class="btn-success btn btn-save" data-id="{{_id}}" data-click="false">Save Article</button>
+                </div>
+                <div class="panel-body">
+                    <p>{{this.summary}}
+                        <br>
+                        <a href="{{this.link}}">Link</a>
+                    </p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

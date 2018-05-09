@@ -1,6 +1,6 @@
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
-    displayResults(data, "index");
+    // displayResults(data, "index");
 });
 
 // scrape on click 
@@ -64,15 +64,15 @@ $(document).on("click", ".btn-save", function (e) {
 });
 
 $(document).on("click", "#saved-articles", function (e) {
-    e.preventDefault();
-    $("h1").text("Saved Articles");
-    $("h3").text("Your saved articles");
-    // Now make an ajax call for the Article
-    $.getJSON("/save", function (data) {
-        console.log(data);
-        displayResults(data, "savedarticles");
+    // e.preventDefault();
+    // $("h1").text("Saved Articles");
+    // $("h3").text("Your saved articles");
+    // // Now make an ajax call for the Article
+    // $.getJSON("/save", function (data) {
+    //     console.log(data);
+    //     // displayResults(data, "savedarticles");
 
-    });
+    // });
 
 });
 
